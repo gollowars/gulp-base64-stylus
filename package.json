@@ -1,0 +1,31 @@
+{
+  "name": "gulp-base64-stylus",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "base64-img": "^1.0.3",
+    "fs-extra": "^2.1.2",
+    "gulp-util": "^3.0.8",
+    "image-size": "^0.5.1",
+    "through2": "^2.0.3"
+  },
+  "devDependencies": {
+    "debug": "^2.6.3",
+    "babel-cli": "^6.24.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-stage-3": "^6.22.0"
+  },
+  "scripts": {
+    "build": "babel index.babel -o index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "private": false,
+  "author": "gollowars",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "license": "ISC"
+}

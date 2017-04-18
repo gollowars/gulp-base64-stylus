@@ -9,7 +9,7 @@ npm install gulp-base64-stylus --save
 ```
 
 ## prepare
-put all image in dir  
+put all image 
 ```
 .
 ├── src ├── images

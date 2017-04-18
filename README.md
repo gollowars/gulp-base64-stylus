@@ -1,6 +1,6 @@
 # gulp-base64-stylus
 
-gulp-base64-stylus is gulp plugin that convert image file into base64 stylus (or sass)
+gulp-base64-stylus is a gulp plugin that convert image to base64 on stylus (or sass)
 
 
 ## install

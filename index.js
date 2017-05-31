@@ -56,6 +56,13 @@ module.exports = function gulpBase64Stylus(option) {
       name = name.replace("@2x.", ".");
     }
 
+    if (name.indexOf("@3x.") != -1) {
+      retina = true;
+      w = w / 3;
+      h = h / 3;
+      name = name.replace("@3x.", ".");
+    }
+
     var nameArray = name.split('.');
     var imageName = nameArray.slice(0, -1).join('.');
 

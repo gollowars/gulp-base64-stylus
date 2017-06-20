@@ -26,7 +26,7 @@ var _gulpUtil2 = _interopRequireDefault(_gulpUtil);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var IMAGE_KIND = ["png", "jpeg", "jpg", "gif"];
+var IMAGE_KIND = ["png", "jpeg", "jpg", "gif", "svg"];
 
 module.exports = function gulpBase64Stylus(option) {
   var dir = null;
@@ -49,25 +49,26 @@ module.exports = function gulpBase64Stylus(option) {
     var w = dimensions.width;
     var h = dimensions.height;
     var retina = false;
-    if (name.indexOf("@2x.") != -1) {
-      retina = true;
-      w = w / 2;
-      h = h / 2;
-      name = name.replace("@2x.", ".");
-    }
+    var svgFlag = name.indexOf('svg') !== -1 ? true : false;
 
-    if (name.indexOf("@3x.") != -1) {
+    var quarityStrList = name.match(/@(.+)x./);
+
+    if (quarityStrList !== null) {
+      var quarityStr = quarityStrList[0];
+      var quarity = parseInt(quarityStrList[1]);
       retina = true;
-      w = w / 3;
-      h = h / 3;
-      name = name.replace("@3x.", ".");
+      w = w / quarity;
+      h = h / quarity;
+      name = name.replace(quarityStr, ".");
     }
 
     var nameArray = name.split('.');
     var imageName = nameArray.slice(0, -1).join('.');
-
     var data = _base64Img2.default.base64Sync(absPath);
-
+    // svg
+    if (svgFlag && data.indexOf('data:image/svg;') !== -1) {
+      data = data.replace('data:image/svg;', 'data:image/svg+xml;');
+    }
     return {
       data: data,
       width: w,

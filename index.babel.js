@@ -5,7 +5,7 @@ import sizeOf from 'image-size'
 import base64Img from 'base64-img'
 import gutil from 'gulp-util'
 
-const IMAGE_KIND = ["png","jpeg","jpg","gif"]
+const IMAGE_KIND = ["png","jpeg","jpg","gif","svg"]
 
 module.exports = function gulpBase64Stylus(option){
   let dir = null
@@ -28,25 +28,26 @@ module.exports = function gulpBase64Stylus(option){
     let w = dimensions.width
     let h = dimensions.height
     let retina = false
-    if(name.indexOf("@2x.") != -1){
+    let svgFlag = (name.indexOf('svg') !== -1)? true : false
+
+    const quarityStrList = name.match(/@(.+)x./)
+
+    if(quarityStrList !== null) {
+      const quarityStr = quarityStrList[0]
+      const quarity = parseInt(quarityStrList[1])
       retina = true
-      w = w/2
-      h = h/2
-      name = name.replace("@2x.",".")
-    }
-    
-    if(name.indexOf("@3x.") != -1){
-      retina = true
-      w = w/3
-      h = h/3
-      name = name.replace("@3x.",".")
+      w = w/quarity
+      h = h/quarity
+      name = name.replace(quarityStr,".")
     }
 
     let nameArray = name.split('.')
     let imageName = nameArray.slice(0,-1).join('.')
-
     let data = base64Img.base64Sync(absPath)
-
+    // svg
+    if(svgFlag && data.indexOf('data:image/svg;') !== -1) {
+      data = data.replace('data:image/svg;','data:image/svg+xml;')
+    }
     return {
       data: data,
       width: w,

@@ -1,6 +1,6 @@
 {
   "name": "gulp-base64-stylus",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "",
   "main": "index.js",
   "dependencies": {
@@ -11,14 +11,15 @@
     "through2": "^2.0.3"
   },
   "devDependencies": {
-    "debug": "^2.6.3",
     "babel-cli": "^6.24.0",
     "babel-preset-es2015": "^6.24.0",
-    "babel-preset-stage-3": "^6.22.0"
+    "babel-preset-stage-3": "^6.22.0",
+    "debug": "^2.6.3",
+    "gulp": "^3.9.1",
+    "gulp-stylus": "^2.6.0"
   },
   "scripts": {
-    "build": "babel index.babel -o index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel index.babel.js -o index.js"
   },
   "keywords": [],
   "private": false,
